@@ -2,7 +2,7 @@
 
 A falsifiable ethics spine (Shard + Kernel + Companion) with checksum-based integrity verification.
 
-**Current version:** 1.2.0 (2026-01-01)
+**Current version:** 1.2.1 (2026-01-01)
 
 ## Files (read in this order)
 
