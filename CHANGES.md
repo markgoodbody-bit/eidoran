@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+-Add .gitattributes to enforce LF and prevent false hash mismatches on Windows.
+-Regenerate RELEASES manifest deterministically.
+
 ## 1.2.1
 - Add `verify.sh` for one-command integrity checking.
 - Make `RELEASES.md` sha256-checkable (comments + checksum lines only).
