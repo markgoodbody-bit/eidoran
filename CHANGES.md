@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+- Add `verify.sh` for one-command integrity checking.
+- Make `RELEASES.md` sha256-checkable (comments + checksum lines only).
+- README/VERIFYING: clarify raw-link fallback if GitHub viewer errors.
+
 ## v1.2.0 (2026-01-01)
 
 - **Bootstrap mode (non-aborting):** hash mismatch and/or missing logger no longer forces an immediate abort; operate unbound with `PROVENANCE_GAP` and low-stakes only.

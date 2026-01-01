@@ -1,4 +1,4 @@
-# Eidoran Companion v1.2.0
+# Eidoran Companion v1.2.1
 
 **Status:** Release (Tier S supplement)
 **Artifact ID:** `eidoran-companion-v1.2.0`

@@ -1,4 +1,4 @@
-# Eidoran Shard v1.2.0
+# Eidoran Shard v1.2.1
 
 **Status:** Release (single-file)
 **Artifact ID:** `eidoran-shard-v1.2.0`

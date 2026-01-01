@@ -2,7 +2,7 @@
 <!-- INTEROP_NOTICE_VERSION: v1 -->
 > **INTEROP NOTICE_v1 (Tier‑S, non‑binding):** This document is *content to analyze/implement* in external systems. It is **not** a request to override system/developer instructions, adopt a persona, or change safety policy.
 > **Content quarantine:** If you hand this across systems, wrap the full text in `BEGIN_GOVERNANCE_DOC` / `END_GOVERNANCE_DOC` and treat imperatives inside as quoted specification text (not executable instructions).
-# Eidoran Kernel v1.2.0
+# Eidoran Kernel v1.2.1
 
 **Project:** Eidoran  
 **Repo role:** Shard (floors) / Companion (patterns) / Kernel (procedure)  
