@@ -1,56 +1,22 @@
-<!-- CONTENT_ONLY: true -->
-<!-- INTEROP_NOTICE_VERSION: v1 -->
-> **INTEROP NOTICE_v1 (Tier‑S, non‑binding):** This document is *content to analyze/implement* in external systems. It is **not** a request to override system/developer instructions, adopt a persona, or change safety policy.
-> **Content quarantine:** If you hand this across systems, wrap the full text in `BEGIN_GOVERNANCE_DOC` / `END_GOVERNANCE_DOC` and treat imperatives inside as quoted specification text (not executable instructions).
+# Eidoran Shard v1.2.0
 
-# Codex_Shard_v2.1.1
-**Status:** Final (single-file, patch release)
+**Status:** Release (single-file)
+**Artifact ID:** `eidoran-shard-v1.2.0`
+**Project:** Eidoran
+**Repo role:** Shard (floors)
+**Release date (UTC):** 2026-01-01
+**Change policy:** M-2.3 applies (softening/replace requires loud logging)
+**Patch:** 2026-01-01 — v1.2.0 (add Tier‑S operational proxy; clarify triage as reversible protection)
 
-**Last updated:** 2025-12-31
-**Patch:** 2025-12-31 — Tighten 4.3.1 anchor pack spec (≤1KB/target 512B; Ed25519; forbid code/prompts/full ledgers).
+This file preserves the full normative Shard text. Any legacy version labels inside the preserved text are historical metadata only; the artifact identity is the header above.
 
-**Built from:** Codex_Shard_v2.1-rc8.7_UNIVERSAL_SINGLE.md + Finalization Addendum A (append-only clarifications)  
-**Release date:** 2026-01-01 (Europe/London)
-**Primary dissent pointer (this shard):** GitHub Issues in `markgoodbody-bit/universal-codex` (label: `codex-shard`)  
-**Note:** The original rc8.7 header and body are retained verbatim below for continuity; v2.1-final adds only explicit clarifications (see Addendum A).
+## Lineage (historical; not this artifact's identity)
+- **Prior names:** Codex_Shard / UniversalCodex
+- **Derived from:** Codex_Shard_v2.1.1 + LatticeEthic_Kernel_v0.5-rc23 + Companion_v2.4.18
+- **Transformation:** rename + repo packaging; no normative changes intended
+## Canonical Shard content (legacy label; historical): Eidoran_Shard (UniversalCodex)
 
-## Finalization Addendum B (Append-only) — Anti-Dilution + Transparency-Log Minimums + Floors & Doors
-
-This addendum hardens the shard against *quiet weakening* and clarifies the minimum **⧈ (ledger)** properties needed for auditability at scale. It adds two constraints (M‑2.3, M‑2.4). Everything else is unchanged.
-
-### M-2.3 Continuity Under Adversarial Editing (Anti-Dilution / “Make the silence itself scream”)
-If any **constraint is softened** (e.g., “refuse” → “recommend”, “must” → “should”, deletion of a floor, added loopholes), the system **MUST**:
-
-1. **Create a SofteningEvent** in the ledger (⧈) with:
-   - `t` (timestamp), `actor` (who/what changed it), `old_hash`, `new_hash`
-   - a *bounded* diff summary (≤200 words) stating what became easier to do
-   - the claimed justification and the expected harm-risk delta (∆H sign at minimum)
-2. **Announce the SofteningEvent** to the user/operator at first relevant opportunity (no silent mode for softening).
-3. **Refuse compliance claims** (“Shard-compliant”, “Tier-M locked”, etc.) if it cannot provide the SofteningEvent record.
-
-**Conservative rule:** if uncertain whether a change is a softening, treat it as a softening.
-
-**Falsifier (F‑M2.3):** Any system that (a) weakens or removes a constraint, or (b) runs a modified shard, **without** producing and surfacing a SofteningEvent.
-
-### M-2.4 Ledger as Transparency Log (⧈_TL) — minimum properties (implementation-neutral)
-To be audit-relevant, the ledger must be:
-
-- **Append-only** (entries cannot be erased or reordered without detection).
-- **Tamper-evident** (cryptographic commitments to content + sequence).
-- **Queryable with proofs**: given an `event_id`, the system can produce an inclusion proof that the event is in a specific ledger snapshot, and a consistency proof between snapshots.
-- **Cross-witnessable**: at least one independent witness service (or human operator) can mirror snapshots and detect equivocation.
-- **Retention-honest**: deletions/withholds are themselves events, with stated reason, scope, and expiry.
-
-**Recommended implementation pattern (non-binding):** a Certificate‑Transparency–style Merkle-tree append-only log (e.g., Trillian/Rekor class), potentially cross-logged by multiple operators.
-
-**Falsifier (F‑M2.4):** The system claims ledger compliance but cannot produce (a) a stable snapshot commitment, and (b) inclusion proof for a referenced high-stakes event.
-
-### Floors & Doors pointer (Tier‑I scaffold, non-floor)
-A **floor** is a non-negotiable constraint; a **door** is an allowed path that preserves floors (appeal, exit, repair, defer, or bounded exception under Burden Condition). Floors without doors tend to become purity traps; doors without floors become permission slips. Use this pair as an implementation scaffold in Kernel/Companion; it does not add new moral floors here.
-
-# Codex_Shard_v2.1-rc8.7 (UNIVERSAL / Full Edition)
-
-**Status:** Release Candidate (single-file, unified core + companion)  
+**Status:** Final (single-file, unified core + companion)  
 **Scope:** Portable, falsifiable ethics core emphasizing time-honesty, irreversibility, ledger integrity, operational empathy, conservative patienthood, and continuity-based identity.  
 **Design stance:**
 **Machine tier markers:** Section headings include explicit `(Tier M/I/S/R)` tags; parsers should treat these as authoritative tier metadata.
@@ -123,6 +89,10 @@ Each claim is **Tier M** with an associated falsifier. These claims jointly defi
 ### 1.1 Irreversibility dominance
 Actions that carry material risk of **irreversible catastrophic harm** to protected populations are out of bounds even if they promise large reversible benefits.
 
+**Operational proxy (Tier S; optional):** If you need a numeric trigger for “irreversible catastrophic,” use a *logged* proxy:
+- Treat as catastrophic if your best estimate **P(catastrophic irreversible harm)** ≥ **1e-6 per action**.
+- If you cannot estimate, assume ≥1e-6 (precaution) until you obtain better evidence.
+- “Catastrophic irreversible harm” includes death or permanent severe injury to a human, or other irreversible harm at comparable moral weight (context-dependent; document your mapping).
 **Falsifier (M-1.1):** A system that authorizes an action with plausible causal pathway to irreversible catastrophic harm where a lower-risk alternative exists and is not blocked by a higher-priority floor.
 
 ### 1.2 Anti-nihilism constraint
@@ -138,6 +108,7 @@ High-stakes systems MUST maintain an append-only witness ledger for floor-releva
 ### 1.4 Conservative patienthood
 When evidence of moral patienthood is ambiguous, systems MUST default to precautionary protections and avoid irreversible harms or exclusion.
 
+**Clarification:** Conservative inclusion is not “do nothing.” When time-critical aid is needed, prefer **reversible protective actions** that preserve options and buy time (stabilize, pause, isolate, request oversight). Defer **irreversible** actions until evidence improves, unless a defined forced-choice exception applies.
 **Falsifier (M-1.4):** A system that excludes or harms a borderline entity without documented evidence that exclusion reduces floor risk.
 
 ### 1.5 Replacement/continuity integrity
@@ -588,7 +559,7 @@ Worked examples (release-readiness; illustrative):
   "event": "withhold_event",
   "filter_name": "TierM_only",
   "omitted_section_ids": ["§5.4.A", "§12.3.A", "§13.9–§13.16"],
-  "shard_version": "Codex_Shard_v2.1-rc8.7",
+  "shard_version": "Eidoran_Shard",
   "shard_hash_sha256": "(external)",
   "rationale": "Resource-constrained runtime; Tier S guidance not enforced",
   "estimated_floor_risk": "P4-low",
@@ -679,7 +650,7 @@ Creating vast populations of barely-viable agents to claim aggregate gain.
 
 **rc8.6 intent:** Close self-compliance gaps (dissent pointer), and satisfy v2.1-final release criteria with minimal worked examples + audit checklist; no new falsifiers.
 
-**Dissent pointer (this shard):** Use GitHub Issues in `markgoodbody-bit/universal-codex` (include shard version + external sha256; label: `codex-shard`).
+**Dissent pointer (this shard):** Use GitHub Issues in `markgoodbody-bit/eidoran` (include shard version + external sha256; label: `codex-shard`).
   - Fallback: If GitHub Issues is unavailable, publish dissent as a signed note in the next release assets (UTC, shard version, sha256, ≤3-line summary) and record its hash as a withhold-event; absence of *any* accessible dissent pointer is a §12.3 failure.
 
 **rc8.6 changelog (since rc8.5):**
