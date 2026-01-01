@@ -1,6 +1,6 @@
 # Security Policy (Eidoran)
 
-**Current version:** 1.2.0 (2026-01-01)
+**Current version:** 1.2.1 (2026-01-01)
 
 ## Scope
 
