@@ -1,23 +1,26 @@
-# Security policy
+# Security Policy (Eidoran)
+
+**Current version:** 1.2.0 (2026-01-01)
+
+## Scope
+
+This project is a set of documents. The main “security” risks are:
+
+- Integrity / tampering (silent edits, swapped files, checksum mismatch).
+- Prompt-injection via documents that try to force a model to claim capabilities it doesn't have.
+- Confusing or misleading verification instructions.
 
 ## Reporting
 
-If you believe you have found:
+- **Non-sensitive issues** (typos, clarity problems, falsifiers, contradictions):
+  open a GitHub issue.
 
-- a vulnerability in the verification/integrity workflow, or
-- a way to silently alter core artifacts (Shard/Kernel/Companion) without detectable change, or
-- any issue that could plausibly lead to unsafe real-world guidance,
+- **Sensitive integrity issues** (e.g., suspected compromise, malicious rewrite, impersonation):
+  use GitHub Security Advisories (preferred) or contact the repository owner via their public
+  contact method on GitHub.
 
-please report it **privately** using GitHub Security Advisories for this repository (preferred), or open an Issue marked clearly as security-sensitive if an advisory is not available.
+## Supported versions
 
-## What to include
+- The latest version on the default branch is supported.
+- Older tagged releases are “as-is” unless explicitly marked otherwise in RELEASES.md / CHANGES.md.
 
-- The exact file name(s) and section anchor(s).
-- A minimal description of the exploit/failure mode.
-- Reproduction steps (or a small PoC) where possible.
-- Expected vs observed behavior.
-
-## Non-goals
-
-- General philosophical disagreement (use Discussions).
-- Requests to weaken refusal/ledger requirements (use Discussions; expect adversarial review).
