@@ -9,3 +9,5 @@ What it does not include:
 - Upstream classification (labeling) code
 - Dataset-backed calibration
 - CI wiring (add it in your repo)
+
+- Added `claims_reliability` gate + `EVIDENCE_GRADE.md` for deterministic assertion-strength gating on high-stakes claims.

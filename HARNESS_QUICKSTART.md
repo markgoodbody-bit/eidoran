@@ -58,3 +58,13 @@ python mutation_tests.py fixtures.jsonl
 5) Record why in CHANGES_NOTES.md (or your repo changelog).
 
 Fixtures first, then patches. No "vibes".
+
+## Claims reliability fixtures
+
+The fixture suite includes a small `claims_reliability` domain to test evidence-grade gating for high-stakes claims.
+
+Run the harness as usual:
+
+```powershell
+python .\run_harness.py .\fixtures.jsonl
+```

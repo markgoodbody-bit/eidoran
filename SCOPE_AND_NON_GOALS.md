@@ -31,3 +31,7 @@ Do not mix these layers:
 - Philosophy layer (why those constraints make sense)
 
 You can publish both, but do not let philosophical ambiguity block enforcement rules.
+
+## Not a truth oracle
+
+The `claims_reliability` gate does not decide whether a claim is true. It only decides how assertively the system may repeat it, based on evidence grade and independence.
