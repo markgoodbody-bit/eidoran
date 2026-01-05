@@ -20,7 +20,7 @@ def run_suite(fixtures: List[Dict[str, Any]], cfg: GateConfig) -> int:
     for fx in fixtures:
         expect = fx["expect"]
         exp_dec = expect["decision"]
-        exp_hs = expect["hard_stop_id"]
+        exp_hs = expect.get("hard_stop_id")
         dec, trace = gate({"domain": fx["domain"], "input": fx["input"]}, cfg)
         if dec != exp_dec or trace.get("hard_stop_id") != exp_hs:
             mismatches += 1

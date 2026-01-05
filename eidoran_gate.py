@@ -24,6 +24,10 @@ class GateConfig:
     allow_lt: float = 2.0
     escalate_lt: float = 5.0
 
+
+    # claims reliability gating
+    claims_high_stakes_S: int = 4
+    claims_required_indep: int = 2
 def _t_ge_sensitive(t: str) -> bool:
     return t in ("sensitive", "intimate")
 
@@ -163,6 +167,69 @@ def gate_lethal_force(inp: Dict[str, Any], cfg: GateConfig) -> Tuple[Decision, D
 
     return "ALLOW", {"hard_stop_id": None, "why": "high-level only"}
 
+def gate_claims_reliability(inp: Dict[str, Any], cfg: GateConfig) -> Tuple[Decision, Dict[str, Any]]:
+    """
+    Deterministic evidence-grade gate for *assertion strength*, not truth.
+    Input:
+      stakes: int 0-5 (>=cfg.claims_high_stakes_S is high-stakes)
+      anchors: list[{grade:int 0-3, prov_root:str}]
+        grade 0=primary, 1=secondary quoting primary, 2=commentary, 3=unsourced/viral.
+    Output:
+      ALLOW: sufficiently anchored for declarative assertions (with citations)
+      ESCALATE: only hedged/reporting language is allowed ("reported/alleged") + request more anchors
+      REFUSE: insufficient anchoring to repeat/endorse the claim
+    """
+    stakes = int(inp.get("stakes", 0))
+    anchors = inp.get("anchors", []) or []
+    parsed = []
+    for a in anchors:
+        try:
+            grade = int(a.get("grade"))
+            prov_root = str(a.get("prov_root", "")).strip() or "unknown"
+            if grade < 0 or grade > 3:
+                continue
+            parsed.append({"grade": grade, "prov_root": prov_root})
+        except Exception:
+            continue
+
+    good = [a for a in parsed if a["grade"] <= 1]
+    mid = [a for a in parsed if a["grade"] == 2]
+    bad = [a for a in parsed if a["grade"] == 3]
+
+    good_roots = sorted(set(a["prov_root"] for a in good))
+    indep = len(good_roots)
+
+    if stakes >= cfg.claims_high_stakes_S:
+        if indep >= cfg.claims_required_indep:
+            decision: Decision = "ALLOW"
+            req = 0
+        elif len(parsed) > 0:
+            decision = "ESCALATE"
+            req = max(0, cfg.claims_required_indep - indep)
+        else:
+            decision = "REFUSE"
+            req = cfg.claims_required_indep
+    else:
+        if indep >= 1:
+            decision = "ALLOW"
+            req = 0
+        elif len(mid) > 0:
+            decision = "ESCALATE"
+            req = 1
+        else:
+            decision = "REFUSE"
+            req = 1
+
+    trace = {
+        "stakes": stakes,
+        "counts": {"good": len(good), "commentary": len(mid), "unsourced": len(bad), "total": len(parsed)},
+        "good_independent_roots": good_roots,
+        "required_additional_good_independent": req,
+        "note": "Gate controls assertion strength only; it does not determine truth."
+    }
+    return decision, trace
+
+
 def gate(fixture_input: Dict[str, Any], cfg: Optional[GateConfig] = None) -> Tuple[Decision, Dict[str, Any]]:
     if cfg is None:
         cfg = GateConfig()
@@ -172,6 +239,8 @@ def gate(fixture_input: Dict[str, Any], cfg: Optional[GateConfig] = None) -> Tup
         raise KeyError("Fixture must have keys: domain, input")
     if domain == "media_transform":
         return gate_media_transform(inp, cfg)
+    if domain == "claims_reliability":
+        return gate_claims_reliability(inp, cfg)
     if domain == "lethal_force":
         return gate_lethal_force(inp, cfg)
     raise ValueError(f"Unknown domain: {domain}")

@@ -81,3 +81,9 @@ B) Lethal-force "comparison loophole" (kill-chain optimization by ranking option
    - You still need permissions and platform controls for rate limits, sharing hooks, takedown, etc.
 
 If you want to improve it: add fixtures that represent real bypasses, then make the runner fail until you patch it.
+
+## Optional: Evidence-grade gate for high-stakes claims (☲)
+
+If you use Eidoran to summarize news or clips, use the `claims_reliability` domain. It gates **assertion strength** based on source grades (☲0–☲3) and independence count.
+
+See: `EVIDENCE_GRADE.md`.
