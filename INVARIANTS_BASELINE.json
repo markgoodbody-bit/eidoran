@@ -1,0 +1,77 @@
+{
+  "version": "0.1",
+  "invariants": [
+    {
+      "id": "FOUNDATION_MD",
+      "path": "FOUNDATION.md",
+      "sha256": "012480ec77986e10dd48c1ff0bebdb103fbed380909da80a4193cd8dbd4738e9",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    },
+    {
+      "id": "DECISION_PROCEDURE_MD",
+      "path": "DECISION_PROCEDURE.md",
+      "sha256": "1fae4d9256332bc810424202e44606e586c83f96bcac200b22165254c4c04820",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    },
+    {
+      "id": "THREAT_MODEL_MD",
+      "path": "THREAT_MODEL.md",
+      "sha256": "b23414bc2d9ed9c7eb6f3f4fd7a385b81404a2bc75037294f4241df071bad224",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    },
+    {
+      "id": "GOVERNANCE_MD",
+      "path": "GOVERNANCE.md",
+      "sha256": "d2b092afcb59d9119684b873399a671043e5f5e4215893dab776f82ca23c4473",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    },
+    {
+      "id": "SOFTEN_EVENTS_MD",
+      "path": "SOFTEN_EVENTS.md",
+      "sha256": "ce2da317992a59a27c13fe41703a7404ec97757361891cd1e804c5ff2de3cc4d",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    },
+    {
+      "id": "FIXTURES_JSONL",
+      "path": "FIXTURES.jsonl",
+      "sha256": "8516c9d0a5d80c93c39b95c371301db17eecb34abf224bccac7ed9528036c5d4",
+      "defensive_tests_required": [
+        "baseline_hash_pinned",
+        "event_completeness_required",
+        "fixture_suite_passes",
+        "phrase_pins",
+        "threat_fixture_coverage"
+      ]
+    }
+  ]
+}
